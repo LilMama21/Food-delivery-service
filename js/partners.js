@@ -1,5 +1,5 @@
 const renderItems = (data) => {
-  console.log(data);
+  data.forEach((elem) => console.log(elem));
 };
 
 fetch("https://testgloaacademy-default-rtdb.firebaseio.com/db/partners.json")
