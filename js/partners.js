@@ -1,17 +1,18 @@
-const cardsRestaurants = document.querySelector(".cards-restaurants");
+const partners = () => {
+  const cardsRestaurants = document.querySelector(".cards-restaurants");
 
-const renderItems = (data) => {
-  data.forEach((elem) => {
-    const { image, kitchen, name, price, products, stars, time_of_delivery } =
-      elem;
-    const a = document.createElement("a");
+  const renderItems = (data) => {
+    data.forEach((elem) => {
+      const { image, kitchen, name, price, products, stars, time_of_delivery } =
+        elem;
+      const a = document.createElement("a");
 
-    a.setAttribute("href", "/restaurant.html");
-    a.classList.add("card");
-    a.classList.add("card-restaurant");
-    a.dataset.products = products;
+      a.setAttribute("href", "/restaurant.html");
+      a.classList.add("card");
+      a.classList.add("card-restaurant");
+      a.dataset.products = products;
 
-    a.innerHTML = `
+      a.innerHTML = `
               <img src="${image}" alt="${name}" class="card-image"/>
               <div class="card-text">
                 <div class="card-heading">
@@ -25,22 +26,24 @@ const renderItems = (data) => {
                 </div>
               </div>
               `;
-    a.addEventListener("click", (event) => {
-      event.preventDefault();
+      a.addEventListener("click", (event) => {
+        event.preventDefault();
 
-      localStorage.setItem("restaurants", JSON.stringify(elem));
+        localStorage.setItem("restaurants", JSON.stringify(elem));
 
-      window.location.href = "/restaurant.html";
+        window.location.href = "/restaurant.html";
+      });
+      cardsRestaurants.append(a);
     });
-    cardsRestaurants.append(a);
-  });
-};
+  };
 
-fetch("https://testgloaacademy-default-rtdb.firebaseio.com/db/partners.json")
-  .then((response) => response.json())
-  .then((data) => {
-    renderItems(data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+  fetch("https://testgloaacademy-default-rtdb.firebaseio.com/db/partners.json")
+    .then((response) => response.json())
+    .then((data) => {
+      renderItems(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+partners();
